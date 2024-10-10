@@ -51,7 +51,7 @@ message:
     "self": {
         "id": 10,
         "first_name": "Nguyen",
-        "last_name": "Chien 213132",
+        "last_name": "Chien 213132"
     },
     "conversation":{
         "id": "791d13bb-90a6-456f-8e6b-c93ba2ce4b25",
@@ -59,7 +59,7 @@ message:
         "users": [
             10,
             6
-        ],
+        ]
     }
 }
 

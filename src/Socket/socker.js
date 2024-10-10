@@ -5,21 +5,16 @@ const socketServer = (socket, io) => {
   socket.on('online', ({ userId }) => {
     console.log('userId', userId);
     if (!userId) return;
-    // Cho user vào room có tên là chính userId của họ
     socket.join(userId);
 
-    // Kiểm tra xem người dùng đã tồn tại trong danh sách hay chưa
     const existingUserIndex = userOnline.findIndex((u) => u.userId === userId);
 
-    // Nếu người dùng chưa tồn tại, thêm vào danh sách
     if (existingUserIndex === -1) {
       userOnline.push({ userId, socketId: socket.id });
     } else {
-      // Nếu người dùng đã tồn tại, cập nhật lại socketId
       userOnline[existingUserIndex].socketId = socket.id;
     }
 
-    // Phát danh sách các user đang online cho tất cả mọi người
     const onlineIds = userOnline.map((u) => u.userId);
     io.emit('usersOnline', onlineIds);
   });
@@ -68,10 +63,8 @@ const socketServer = (socket, io) => {
   socket.on('typing', ({ conversation, self }) => {
     socket.in(conversation.id).emit('typing', self);
     conversation.users.forEach((userId) => {
-      if (userId === self.id) {
-        return;
-      }
-      socket.in(userId).emit('typing', { conversationId: conversation.id, self });
+      if (userId === self.id) return;
+      socket.in(userId).emit('typing', { conversationId: conversation.id, user: self });
     });
   });
   // stop typing
@@ -84,7 +77,7 @@ const socketServer = (socket, io) => {
         return;
       }
       //  chi nhung nguoi co trong room moi dc nhan chat
-      socket.in(userId).emit('stopTyping', { conversationId: conversation.id, self });
+      socket.in(userId).emit('stopTyping', { conversationId: conversation.id, user: self });
     });
   });
 
