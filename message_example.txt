@@ -1,0 +1,82 @@
+event: online
+message:
+{
+    "userId": 10
+}
+
+
+event: openConversation
+message:
+{
+    "userId":10,
+    "conversation":{
+        "id": "791d13bb-90a6-456f-8e6b-c93ba2ce4b25",
+        "appointment_id": 4,
+        "users": [
+            10,
+            6
+        ]
+    }
+
+}
+
+desciption: userId la id cua user dang mo conversation (la may thuc hien a)
+
+event: sendMessage
+message
+    {
+        "id": 5,
+        "sender_id": 10,
+        "conversation_id": "791d13bb-90a6-456f-8e6b-c93ba2ce4b25",
+        "reply_id": null,
+        "is_read": false,
+        "message": {
+            "media": null,
+            "images": [],
+            "content": "Babdbadasjdfghasfh "
+        },
+        "created_at": 1728595857,
+        "updated_at": 1728595857,
+        "is_deleted": false,
+        "users": [
+            10,
+            9
+        ]
+    }
+
+
+event: typing
+message:
+{
+    "self": {
+        "id": 10,
+        "first_name": "Nguyen",
+        "last_name": "Chien 213132",
+    },
+    "conversation":{
+        "id": "791d13bb-90a6-456f-8e6b-c93ba2ce4b25",
+        "appointment_id": 4,
+        "users": [
+            10,
+            6
+        ],
+    }
+}
+
+event: stopTyping
+message:
+{
+    "self": {
+        "id": 10,
+        "first_name": "Nguyen",
+        "last_name": "Chien 213132",
+    },
+    "conversation":{
+        "id": "791d13bb-90a6-456f-8e6b-c93ba2ce4b25",
+        "appointment_id": 4,
+        "users": [
+            10,
+            6
+        ],
+    }
+}

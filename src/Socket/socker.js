@@ -42,9 +42,7 @@ const socketServer = (socket, io) => {
   // conversation = response.data
   socket.on('openConversation', ({ conversation, userId }) => {
     socket.join(conversation.id);
-
     conversation.users.forEach((e) => {
-      // ko gui lai tin nhan cho nguoi da gui
       if (e === userId) return;
       socket.in(e).emit('openConversation', conversation);
     });
@@ -91,7 +89,7 @@ const socketServer = (socket, io) => {
   });
 
   // Call....
-  socket.on('call', ({ sender, users, type, _id, conversationName, isGroup }) => {
+  socket.on('call', ({ sender, users, type, _id, conversationName }) => {
     console.log('🚀 ~ socket.on ~ users:', users);
     if (!users?.length) return;
 
