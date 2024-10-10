@@ -181,6 +181,10 @@ const socketServer = (socket, io) => {
       delete call;
     }
   });
+  socket.on('registerAppointment', ({ appointment, self }) => {
+    if (!appointment) return;
+    socket.in(appointment.doctor_id).emit('registerAppointment', { appointment, self });
+  });
 };
 
 module.exports = { socketServer };

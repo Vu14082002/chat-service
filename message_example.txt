@@ -80,3 +80,20 @@ message:
         ],
     }
 }
+
+
+event:registerAppointment
+message:
+{
+    "self": {
+        "id": 10,
+        "first_name": "Nguyen",
+        "last_name": "Chien 213132"
+    },
+    "appointment":{
+        "doctor_id":10,
+        "work_schedule_id":5,
+        "name":"kham thuong taii nha",
+        "pre_examination_notes":"Ben nhan so 9 cuo hen thu 2 dang ky lich hen cho bac sĩ sô 10"
+    }
+}
