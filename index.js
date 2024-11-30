@@ -36,3 +36,21 @@ app.post('/api/payment', (req, res) => {
   io.to(userId).emit('payment', message);
   return res.status(200).json({ success: true, message: 'Thông báo đã được gửi qua Socket' });
 });
+
+// send to doctor
+app.post('/api/notify/appointment/new', (req, res) => {
+  const { userId, fromTime, toTime, isSuccess } = req.body; // Ensure isSuccess is part of the request body
+  if (!userId) {
+    return res.status(400).json({ error: 'Missing userId or isSuccess in request body' });
+  }
+  const message = {
+    message: `Bạn vừa có một cuộc hẹn mới vào lúc ${fromTime} đến ${toTime}, vui lòng kiểm tra lịch hẹn của bạn để xem thêm thông tin.`,
+  };
+  try {
+    io.to(userId).emit('notifyNewAppointment', message);
+    return res.status(200).json({ success: true, message: 'Thông báo đã được gửi qua Socket' });
+  } catch (error) {
+    console.error('Error sending notification:', error);
+    return res.status(500).json({ error: 'Failed to send notification' });
+  }
+});
