@@ -39,7 +39,7 @@ app.post('/api/payment', (req, res) => {
 
 // send to doctor
 app.post('/api/notify/appointment/new', (req, res) => {
-  const { userId, fromTime, toTime, isSuccess } = req.body; // Ensure isSuccess is part of the request body
+  const { userId, fromTime, toTime } = req.body; // Ensure isSuccess is part of the request body
   if (!userId) {
     return res.status(400).json({ error: 'Missing userId or isSuccess in request body' });
   }
