@@ -54,3 +54,22 @@ app.post('/api/notify/appointment/new', (req, res) => {
     return res.status(500).json({ error: 'Failed to send notification' });
   }
 });
+
+app.post('/api/notify', (req, res) => {
+  console.log('call socket with data', req.body);
+  const { userId, title, message, createdAt } = req.body; // Ensure isSuccess is part of the request body
+  if (!userId) {
+    return res.status(400).json({ error: 'Missing userId or isSuccess in request body' });
+  }
+  try {
+    io.to(userId).emit('notify', {
+      title,
+      message,
+      createdAt,
+    });
+    return res.status(200).json({ success: true, message: 'Thông báo đã được gửi qua Socket' });
+  } catch (error) {
+    console.error('Error sending notification:', error);
+    return res.status(500).json({ error: 'Failed to send notification' });
+  }
+});
