@@ -57,12 +57,13 @@ app.post('/api/notify/appointment/new', (req, res) => {
 
 app.post('/api/notify', (req, res) => {
   console.log('call socket with data', req.body);
-  const { userId, title, message, createdAt, totalUnread } = req.body; // Ensure isSuccess is part of the request body
+  const { userId, id, title, message, createdAt, totalUnread } = req.body; // Ensure isSuccess is part of the request body
   if (!userId) {
     return res.status(400).json({ error: 'Missing userId or isSuccess in request body' });
   }
   try {
     _dataSend = {
+      id,
       title,
       message,
       createdAt,
